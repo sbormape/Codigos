@@ -1,0 +1,74 @@
+﻿@using RecursivaLayer.Models
+@using RecursivaLayer.Models.Dto
+@model ResultadoDto
+@{
+    ViewBag.Title = "Socios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/angularJS/controllers/SocioController.js"></script>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Socios</title>
+</head>
+<body>
+    <div class="row-fluid">
+        <div class="span5" ng-controller="SocioController">
+            @Html.Partial("Partials/Listado1Partial")
+            @Html.Partial("Partials/Listado2Partial")
+            @Html.Partial("Partials/Listado3Partial")
+            @using (Html.BeginForm("Socios", "Socio", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+          
+                <div class="panel panel-default">
+                
+                    <div class="panel-body">
+                        <div style="min-height: 120px; width: 420px"> 
+                            <table class="table table-striped table-bordered table-condensed table-responsive ">
+                                <tr>
+                                    <td>
+                                        <input type="file" name="postedFile" class="filestyle" data-buttonName="btn-primary" data-iconName="glyphicon glyphicon-plus" data-buttonText="Añade tu Archivo">            
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <input type="submit" value="Enviar" class="btn btn-primary"/>
+                        </div>
+                    </div>                  
+                </div>
+            }
+            
+            @if (Model.CantidadTotal > 0)
+            {
+                <hr />
+                <div class="panel panel-default">
+                    <div class="modal-body" style="margin:20px;">
+                            <div style="min-height: 140px">
+                                Cantidad total de personas registradas: @Model.CantidadTotal <br/><br/>
+                                Promedio de edad de los socios de Racing: @Model.EdadPromedio <br/><br/>
+
+                                    <span class="btn btn-primary btn-sm" data-toggle="modal" ng-click="Listado1ModalOpen()">
+                                        <i class="glyphicon glyphicon-th-list"></i>
+                                            Ver Listado 1</span>  
+                                    <span class="btn btn-primary btn-sm" data-toggle="modal" ng-click="Listado2ModalOpen()">
+                                        <i class="glyphicon glyphicon-th-list"></i>
+                                            Ver Listado 2</span>  
+                                    <span class="btn btn-primary btn-sm" data-toggle="modal" ng-click="Listado3ModalOpen()">
+                                        <i class="glyphicon glyphicon-th-list"></i>
+                                            Ver Listado 3</span>  
+
+                            </div>
+                   </div>                
+                </div>                
+            }
+
+        </div>
+    </div>
+
+</body>
+</html>
